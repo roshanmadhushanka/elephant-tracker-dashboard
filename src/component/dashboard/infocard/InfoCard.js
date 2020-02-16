@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
-import {TOPIC_ROUTE} from '../../common/routes';
 import axios from 'axios';
 import ReactLoading from 'react-loading';
+
+import {TOPIC_ROUTE} from '../../../common/routes';
 import './InfoCard.css';
 
 class InfoCard extends Component {
@@ -29,10 +30,10 @@ class InfoCard extends Component {
         return(
             <div className="body container section card z-depth-1">
                 <div className="card-content">
-                    <span className="card-title">{title}</span>
+                    <span className="card-title"><p className="title-text">{title}</p></span>
                     {loading
-                        ? <div className="spinner"><ReactLoading className="spinner" type={'bars'} color={'#e91e63'} height={'10%'} width={'20%'} /></div>
-                        : <h1 className="pink-text center-align">{value}</h1>}
+                        ? <div><ReactLoading className="spinner" type={'bars'} color={'#e91e63'} height={'10%'} width={'20%'} /></div>
+                        : <div className="card-content"><h1 className="pink-text center-align">{value}</h1></div>}
 
                 </div>
 

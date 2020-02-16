@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {IMU_READING_ROUTE} from '../../../../common/routes';
+import {IMU_READING_ROUTE} from '../../../../../common/routes';
 import axios from "axios";
 import './ImuReadingSummary.css';
 
@@ -18,6 +18,9 @@ class ImuReadingSummary extends Component {
             roll: 0,
             pitch: 0,
             obda: 0,
+            averageAccelerationX: 0.0000,
+            averageAccelerationY: 0.0000,
+            averageAccelerationZ: 0.0000,
         };
     }
 
@@ -42,7 +45,7 @@ class ImuReadingSummary extends Component {
     renderImuData() {
         const url = `${IMU_READING_ROUTE}/${this.state.subjectId}`;
         axios.get(url).then(res => {
-            const {values, roll, pitch, obda} = res.data;
+            const {values, roll, pitch, obda, averageAccelerationX, averageAccelerationY, averageAccelerationZ} = res.data;
             const response = this.parseData(values);
             this.setState({
                 loading: false,
@@ -50,6 +53,9 @@ class ImuReadingSummary extends Component {
                 roll: roll,
                 pitch: pitch,
                 obda: obda,
+                averageAccelerationX: averageAccelerationX,
+                averageAccelerationY: averageAccelerationY,
+                averageAccelerationZ: averageAccelerationZ,
             });
         });
     }
@@ -65,7 +71,7 @@ class ImuReadingSummary extends Component {
     }
 
     render() {
-        const {data, roll, pitch, obda} = this.state;
+        const {data, roll, pitch, obda, averageAccelerationX, averageAccelerationY, averageAccelerationZ} = this.state;
         return (
             <div>
                 <div className="row">
@@ -109,17 +115,55 @@ class ImuReadingSummary extends Component {
                                 <Tooltip />
                                 <Legend />
                                 <Line type="monotone" dataKey="gyroscopeX" stroke="#8884d8"/>
-                                <Line type="monotone" dataKey="accelerationY" stroke="#82ca9d"/>
-                                <Line type="monotone" dataKey="accelerationZ" stroke="#e91e63"/>
+                                <Line type="monotone" dataKey="gyroscopeY" stroke="#82ca9d"/>
+                                <Line type="monotone" dataKey="gyroscopeZ" stroke="#e91e63"/>
                             </LineChart>
                         </div>
                     </div>
                 </div>
                 <div className="row">
                     <div className="card col m5">
-                        Roll {roll} Pitch {pitch} OBDA {obda}
+                        <table className="responsive-table">
+                            <tr>
+                                <th className="header">Parameter</th>
+                                <th className="header">Value</th>
+                            </tr>
+                            <tr>
+                                <td>Roll</td>
+                                <td>{roll}</td>
+                            </tr>
+                            <tr>
+                                <td>Pitch</td>
+                                <td>{pitch}</td>
+                            </tr>
+                            <tr>
+                                <td>OBDA</td>
+                                <td>{obda}</td>
+                            </tr>
+                        </table>
                     </div>
-
+                    <div className="col m1">
+                    </div>
+                    <div className="card col m5">
+                        <table className="responsive-table">
+                            <tr>
+                                <th className="header">Avg. Acceleration Axis</th>
+                                <th className="header">Value (g)</th>
+                            </tr>
+                            <tr>
+                                <td>Acceleration X</td>
+                                <td>{averageAccelerationX}</td>
+                            </tr>
+                            <tr>
+                                <td>Acceleration Y</td>
+                                <td>{averageAccelerationY}</td>
+                            </tr>
+                            <tr>
+                                <td>Acceleration Z</td>
+                                <td>{averageAccelerationZ}</td>
+                            </tr>
+                        </table>
+                    </div>
                 </div>
             </div>
         );
