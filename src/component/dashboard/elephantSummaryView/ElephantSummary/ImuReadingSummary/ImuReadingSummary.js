@@ -13,11 +13,12 @@ class ImuReadingSummary extends Component {
 
         this.state = {
             subjectId: props.subjectId,
-            interval: 5000,
+            interval: 50000,
             data: [],
             roll: 0,
             pitch: 0,
             obda: 0,
+            status: "Undefined",
             averageAccelerationX: 0.0000,
             averageAccelerationY: 0.0000,
             averageAccelerationZ: 0.0000,
@@ -36,6 +37,7 @@ class ImuReadingSummary extends Component {
                 gyroscopeX: record.gyroscopeX,
                 gyroscopeY: record.gyroscopeY,
                 gyroscopeZ: record.gyroscopeZ,
+                status: record.status,
             });
         });
 
@@ -45,7 +47,8 @@ class ImuReadingSummary extends Component {
     renderImuData() {
         const url = `${IMU_READING_ROUTE}/${this.state.subjectId}`;
         axios.get(url).then(res => {
-            const {values, roll, pitch, obda, averageAccelerationX, averageAccelerationY, averageAccelerationZ} = res.data;
+            const {values, roll, pitch, obda, averageAccelerationX, averageAccelerationY, averageAccelerationZ, status}
+            = res.data;
             const response = this.parseData(values);
             this.setState({
                 loading: false,
@@ -56,6 +59,7 @@ class ImuReadingSummary extends Component {
                 averageAccelerationX: averageAccelerationX,
                 averageAccelerationY: averageAccelerationY,
                 averageAccelerationZ: averageAccelerationZ,
+                status: status,
             });
         });
     }
@@ -71,7 +75,7 @@ class ImuReadingSummary extends Component {
     }
 
     render() {
-        const {data, roll, pitch, obda, averageAccelerationX, averageAccelerationY, averageAccelerationZ} = this.state;
+        const {data, roll, pitch, obda, averageAccelerationX, averageAccelerationY, averageAccelerationZ, status} = this.state;
         return (
             <div>
                 <div className="row">
@@ -172,6 +176,19 @@ class ImuReadingSummary extends Component {
                             </tbody>
                         </table>
                     </div>
+                </div>
+                <div className="row">
+                    <div className="col m5 card">
+                        <p className="status-title">Elephant Status</p>
+                        {
+                            status === 'Rapidly Walking'? <p className="btn red">{status}</p>
+                                : status === 'Resting' ? <p className="btn green">{status}</p>
+                                : status === 'Feeding' ? <p className="btn yellow">{status}</p>
+                                    : status === 'Walking' ? <p className="btn orange">{status}</p>
+                                        : <p className="btn grey">Undefined</p>
+                        }
+                    </div>
+
                 </div>
             </div>
         );
