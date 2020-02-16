@@ -13,7 +13,7 @@ class ImuReadingSummary extends Component {
 
         this.state = {
             subjectId: props.subjectId,
-            interval: 500000,
+            interval: 5000,
             data: [],
             roll: 0,
             pitch: 0,

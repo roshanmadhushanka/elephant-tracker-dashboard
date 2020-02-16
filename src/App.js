@@ -2,7 +2,7 @@ import React from 'react';
 import {BrowserRouter, Switch, Route} from 'react-router-dom';
 import NavigationBar from "./component/navigation/NavigationBar";
 import Dashboard from "./component/dashboard/Dashboard";
-import Footer from "./component/footer/Footer";
+// import Footer from "./component/footer/Footer";
 import ElephantSummaryView from "./component/dashboard/elephantSummaryView/ElephantSummaryView";
 
 function App() {
@@ -20,7 +20,7 @@ function App() {
                   </Switch>
               </div>
               <div className="row">
-                  <Footer/>
+                  {/*<Footer/>*/}
               </div>
           </div>
       </BrowserRouter>
