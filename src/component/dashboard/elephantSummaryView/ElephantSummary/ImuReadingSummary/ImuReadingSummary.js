@@ -124,44 +124,52 @@ class ImuReadingSummary extends Component {
                 <div className="row">
                     <div className="card col m5">
                         <table className="responsive-table">
-                            <tr>
-                                <th className="header">Parameter</th>
-                                <th className="header">Value</th>
-                            </tr>
-                            <tr>
-                                <td>Roll</td>
-                                <td>{roll}</td>
-                            </tr>
-                            <tr>
-                                <td>Pitch</td>
-                                <td>{pitch}</td>
-                            </tr>
-                            <tr>
-                                <td>OBDA</td>
-                                <td>{obda}</td>
-                            </tr>
+                            <thead>
+                                <tr>
+                                    <th className="header">Parameter</th>
+                                    <th className="header">Value</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Roll</td>
+                                    <td>{roll}</td>
+                                </tr>
+                                <tr>
+                                    <td>Pitch</td>
+                                    <td>{pitch}</td>
+                                </tr>
+                                <tr>
+                                    <td>OBDA</td>
+                                    <td>{obda}</td>
+                                </tr>
+                            </tbody>
                         </table>
                     </div>
                     <div className="col m1">
                     </div>
                     <div className="card col m5">
                         <table className="responsive-table">
-                            <tr>
-                                <th className="header">Avg. Acceleration Axis</th>
-                                <th className="header">Value (g)</th>
-                            </tr>
-                            <tr>
-                                <td>Acceleration X</td>
-                                <td>{averageAccelerationX}</td>
-                            </tr>
-                            <tr>
-                                <td>Acceleration Y</td>
-                                <td>{averageAccelerationY}</td>
-                            </tr>
-                            <tr>
-                                <td>Acceleration Z</td>
-                                <td>{averageAccelerationZ}</td>
-                            </tr>
+                            <thead>
+                                <tr>
+                                    <th className="header">Avg. Acceleration Axis</th>
+                                    <th className="header">Value (g)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Acceleration X</td>
+                                    <td>{averageAccelerationX}</td>
+                                </tr>
+                                <tr>
+                                    <td>Acceleration Y</td>
+                                    <td>{averageAccelerationY}</td>
+                                </tr>
+                                <tr>
+                                    <td>Acceleration Z</td>
+                                    <td>{averageAccelerationZ}</td>
+                                </tr>
+                            </tbody>
                         </table>
                     </div>
                 </div>
